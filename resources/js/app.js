@@ -6,10 +6,15 @@
 
 require("./bootstrap");
 require("vue-multiselect/dist/vue-multiselect.min.css");
+import VModal from "vue-js-modal";
 import CardContainer from "./components/Card.vue";
 import MenuContainer from "./modules/menu/MenuContainer.vue";
+import RestoGroup from "./modules/restos/RestoGroup.vue";
+import Vue from "vue";
 
 window.Vue = require("vue");
+
+Vue.use(VModal);
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,6 +37,7 @@ Vue.component(
 Vue.component("card-component", CardContainer);
 
 Vue.component("menu-container", MenuContainer);
+Vue.component("resto-group", RestoGroup);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

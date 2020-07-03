@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Services\MenuService;
+use App\Services\RestoService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,10 +24,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(MenuService $service)
+    public function index(MenuService $service, RestoService $restoService)
     {
-        $resto_ids = [1];
-        $menus = $service->getMenuWithCategory($resto_ids);
-        return view('home', compact('menus'));
+        $restoId = 1;
+        $menus = $service->getMenuWithCategories($restoId);
+        $restos = $restoService->userRestoAndTables();
+        return view('home', compact('menus', 'restoId', 'restos'));
     }
 }
