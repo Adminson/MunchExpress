@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateRestaurantsTable extends Migration
 {
@@ -17,7 +17,7 @@ class CreateRestaurantsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('location');
-            $table->unsignedBigInteger('owner_id');
+            $table->unsignedInteger('owner_id');
             $table->integer('tables')->default(1);
             $table->timestamps();
 

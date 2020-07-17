@@ -14,8 +14,14 @@ class MenuController extends Controller
     public function index($id)
     {
         $restoId = $id;
-        $restoService = new MenuService;
-        $menus = $restoService->getMenuWithCategories($restoId);
+        // $restoService = new MenuService;
+
+        $menus = Menu::where('resto_id', $restoId)
+            ->get()
+            ->groupBy('category.name');
+
+
+        // $menus = $restoService->getMenuWithCategories($restoId);
 
         return view('menus.menu-index', compact('menus', 'restoId'));
         // if (!$menus) {
@@ -58,5 +64,19 @@ class MenuController extends Controller
         ]);
 
         return response()->json($menu, 201);
+    }
+
+    public function getRestoMenu(Request $request)
+    {
+        $postData = $this->validate($request, [
+            'restoId' => 'required|exists:restaurants,id',
+        ]);
+
+        $menuItems = Menu::where('resto_id', $postData['restoId'])
+            ->orderBy('name')
+            ->orderBy('category_id')
+            ->get();
+
+        return response()->json($menuItems, 200);
     }
 }

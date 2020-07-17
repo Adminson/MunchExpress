@@ -7,10 +7,16 @@
 require("./bootstrap");
 require("vue-multiselect/dist/vue-multiselect.min.css");
 import VModal from "vue-js-modal";
+import TurboLinks from "turbolinks";
+import TurbolinksAdapter from "vue-turbolinks";
 import CardContainer from "./components/Card.vue";
 import MenuContainer from "./modules/menu/MenuContainer.vue";
 import RestoGroup from "./modules/restos/RestoGroup.vue";
+import OrderGroup from "./modules/orders/OrderGroup.vue";
+import ManageOrder from "./modules/orders/ManageOrders.vue";
 import Vue from "vue";
+
+TurboLinks.start();
 
 window.Vue = require("vue");
 
@@ -38,6 +44,8 @@ Vue.component("card-component", CardContainer);
 
 Vue.component("menu-container", MenuContainer);
 Vue.component("resto-group", RestoGroup);
+Vue.component("order-group", OrderGroup);
+Vue.component("manage-orders", ManageOrder);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -45,6 +53,13 @@ Vue.component("resto-group", RestoGroup);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: "#app"
+window.eventBus = new Vue({});
+
+document.addEventListener("turbolinks:load", () => {
+    var element = document.getElementById("app");
+    if (element != null) {
+        const app = new Vue({
+            el: element
+        });
+    }
 });

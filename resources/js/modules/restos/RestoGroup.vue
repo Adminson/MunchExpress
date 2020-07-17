@@ -13,9 +13,12 @@
                             <i class="fa fa-map-marker-alt"></i>
                             {{ resto.location }}
                             <br />
-                            <i class="fa fa-table"></i>
-                            {{ resto.tables }}
+                            <i class="fa fa-table"></i> {{ resto.tables }}
                         </div>
+                        <a class="card-link" v-bind:href="resto.slug">Menu</a>
+                        <a class="card-link" v-bind:href="resto.ordersSlug"
+                            >Orders</a
+                        >
                     </template>
                 </card-component>
             </div>
@@ -23,12 +26,16 @@
                 <card-component>
                     <template slot="title">Add new Restaurant</template>
                     <template slot="main">
-                        <span @click="handleAddNewResto">
-                            <i class="fa fa-plus-circle fa-5x pointer">+</i>
-                        </span>
+                        <div class="add-button-wrapper">
+                            <span @click="handleAddNewResto">
+                                <i class="fa fa-plus-circle fa-5x pointer"
+                                    >++++++++</i
+                                >
+                            </span>
+                        </div>
                     </template>
                 </card-component>
-                <modal name="add-new-resto" height="80%">
+                <modal name="add-new-resto" height="55%">
                     <div class="container-padding">
                         <RestoAddForm
                             @addRestoEvent="handleSaveResto"
